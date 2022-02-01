@@ -1,0 +1,66 @@
+<hr />
+<h1><u>Add Todo form</u></h1>
+<div class="alert alert-success" *ngIf="message">{{ message }}</div>
+<div class="container">
+  <div class="alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">Enter valid value</div>
+  <form (ngSubmit)="!todoForm.invalid && submitToDo()" #todoForm="ngForm">
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Todo Description</label>
+    <input
+      class="form-control"
+      id="exampleFormControlTextarea1"
+      type="text"
+      name="description"
+      [(ngModel)]="todo.description"
+      required="required"
+      min="5"
+    />
+  </div>
+  <div class="row">
+    <legend class="col-form-label col-sm-2 pt-0">Status</legend>
+    <div class="col-sm-10">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="option1"
+          name="gridRadios"
+          [checked]="todo.done"
+        />
+        <label class="form-check-label" for="gridRadios1"> Done </label>
+      </div>
+      <div class="form-check form-group">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="gridRadios"
+          id="gridRadios2"
+          value="option2"
+          [checked]="!todo.done"
+        />
+        <label class="form-check-label" for="gridRadios2"> Not Yet </label>
+      </div>
+    </div>
+  </div>
+  <div
+    id="date-picker-example"
+    class="md-form md-outline input-with-post-icon datepicker form-group"
+  >
+    <label>Target Date</label>
+    <input
+      placeholder="Select date"
+      type="date"
+      id="example"
+      required="required"
+      name="date"
+      class="form-control"
+      [ngModel]="todo.date | date: 'yyyy-MM-dd'"
+      (ngModelChange)="todo.date = $event"
+    />
+  </div>
+  <div class="mt-2 pl-3">
+    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="reset" class="btn btn-danger pl">Reset</button>
+  </div>
+</form>
+</div>
